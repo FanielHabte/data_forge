@@ -1,0 +1,4 @@
+/src/resources
+.env
+.venv
+/test/resources

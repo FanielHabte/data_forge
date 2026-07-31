@@ -1,0 +1,7 @@
+requests==2.34.2
+pandas==3.0.5
+sqlalchemy==2.0.51
+pathlib==1.0.1
+repository_sqlalchemy==0.1.8
+python-dotenv==1.2.2
+boto3==1.43.59
