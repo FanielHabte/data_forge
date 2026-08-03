@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from src.data_forge.pipeline.auth.auth import Auth
+from data_forge.sales_force.auth.auth import Auth
 from src.data_forge.context.context import Context
-from src.data_forge.db.query import Query
-from src.data_forge.pipeline.sales_force.sales_force import SalesForce
+from data_forge.db.query_payload import Query
+from data_forge.sales_force.sales_force import SalesForce
 
 
 @dataclass(frozen=True)
@@ -28,8 +28,8 @@ class Pipeline:
             sales_force=sales_force_obj
         )
 
-    def run(self, table_name: str):
-        self.sales_force.fetch_data_from_table(table_name)
+    def fetch_data(self, from_table: str):
+        self.sales_force.fetch_data_from_table(table_name=from_table)
 
     def bulk_export(self, from_table: str, to_folder: Path):
         self.sales_force.request_bulk_export(table_name=from_table, folder_path=to_folder)

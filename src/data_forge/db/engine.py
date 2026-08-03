@@ -1,0 +1,19 @@
+from sqlalchemy import create_engine
+from dataclasses import dataclass
+from sqlalchemy.engine import Engine
+
+from data_forge.db.engine_payload import DBEnginePayload
+
+
+@dataclass(frozen=True)
+class DBEngine:
+    payload: DBEnginePayload
+
+    @classmethod
+    def build(cls) -> Engine:
+        payload = cls.payload
+
+        # sqlalchemy syntax
+        # dialect://username:password@host:port/database
+        return create_engine(
+            f"{payload.type}://{payload.user}:{payload.password}@{payload.host}:{payload.port}/{payload.name}")

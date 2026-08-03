@@ -5,7 +5,7 @@ from src.data_forge.util.helper import utc_now
 
 
 @dataclass
-class Checkpoint:
+class CheckPoint:
     partition_id: str
     last_committed_page: int
     records_written: int

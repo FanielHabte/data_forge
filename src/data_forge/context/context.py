@@ -10,8 +10,10 @@ class Context:
     chunk_size: int
     client_id: str
     client_secret: str
+    export_path: str
     grant_type: str
     tables: list[dict]
+    databases: dict
 
     @classmethod
     def load_context_from(cls, file_path: Path) -> "Context":

@@ -2,13 +2,13 @@ from datetime import datetime
 from pathlib import Path
 from time import sleep
 
-import pandas
+from pandas import read_csv
 import requests
 from dataclasses import dataclass
 
-from src.data_forge.pipeline.auth.auth import Auth
+from data_forge.sales_force.auth.auth import Auth
 from src.data_forge.context.context import Context
-from src.data_forge.db.query import Query
+from data_forge.db.query_payload import Query
 
 
 @dataclass(frozen=True)
@@ -20,7 +20,7 @@ class SalesForce:
     def _soql_request_kwargs(self, table_name: str) -> dict:
         token = self.auth.get_token()
         base_url = self.context.base_url
-        sql_query = self.query.build_query(table_name=table_name)
+        sql_query = self.query.build_select_query(table_name=table_name)
 
         header = {"Authorization": f"Bearer {token}"}
         endpoint = "/services/data/v60.0/queryAll"
@@ -35,7 +35,7 @@ class SalesForce:
     def _bulk_request_kwargs(self, table_name: str):
         token = self.auth.get_token()
         base_url = self.context.base_url
-        sql_query = self.query.build_query(table_name=table_name)
+        sql_query = self.query.build_select_query(table_name=table_name)
 
         header = {
             "Authorization": f"Bearer {token}",
@@ -232,7 +232,7 @@ def _download_bulk_export(kwargs, download_dir: Path, table_name: str, file_numb
         if response.status_code == 429:
             sleep(70)
 
-        with pandas.read_csv(response.raw, chunksize=chunk_size) as reader:
+        with read_csv(response.raw, chunksize=chunk_size) as reader:
             for chunk_df in reader:
                 if file_path.exists():
                     chunk_df.to_csv(file_path, mode="a")
