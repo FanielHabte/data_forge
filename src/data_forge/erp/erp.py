@@ -2,14 +2,30 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-from data_forge.shared.db_super_class import DbInterface
+import polars as pl
+
+from data_forge.db.db_super_class import DbInterface
 
 
 @dataclass
 class Erp(DbInterface):
+    source: str = "erp"
 
-    def extract_latest_data(self):
-        pass
+    def extract_latest_data(self, table_name: str):
+        query = self.query.build_select_query(table_name=table_name, source=self.source, merged_type=True)
+
+        with self.engine.connect() as conn:
+            df_iter = pl.read_database(
+                query=query,
+                connection=conn,
+                iter_batches=True,
+                batch_size=50000
+            )
+
+            for df in df_iter:
+                yield df.with_columns(
+                    pl.lit(datetime.now()).alias("dw_run_timestamp")
+                )
 
     def extract_between(self, start_time: datetime, end_time: datetime, table_name: str | None = None):
         pass
@@ -19,7 +35,4 @@ class Erp(DbInterface):
 
     def bulk_export_between(self, start_time: datetime, end_time: datetime, to_folder: Path,
                             table_name: str | None = None):
-        pass
-
-    def load(self, table_name: str | None = None):
         pass

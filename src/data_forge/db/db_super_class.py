@@ -7,7 +7,7 @@ from sqlalchemy.engine import Engine
 
 from data_forge.context.context import Context
 from data_forge.db.query_payload import Query
-from data_forge.logging.checkpoint import CheckPoint
+from polars.dataframe.frame import DataFrame
 
 
 @dataclass
@@ -15,10 +15,11 @@ class DbInterface(ABC):
     engine: Engine
     context: Context
     query: Query
-    check_point: CheckPoint
+
+    # check_point: CheckPoint
 
     @abstractmethod
-    def extract_latest_data(self):
+    def extract_latest_data(self, table_name: str):
         pass
 
     @abstractmethod
@@ -34,6 +35,18 @@ class DbInterface(ABC):
                             table_name: str | None = None):
         pass
 
+
+@dataclass
+class DWInterface(DbInterface):
+
     @abstractmethod
-    def load(self, table_name: str | None = None):
+    def bulk_insert(self):
+        pass
+
+    @abstractmethod
+    def insert_dataframe(self, data_stream, table_name: str, source: str):
+        pass
+
+    @abstractmethod
+    def merge_latest_data(self):
         pass

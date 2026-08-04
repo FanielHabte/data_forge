@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-from data_forge.shared.db_super_class import DbInterface
+from data_forge.db.db_super_class import DbInterface
 
 
 @dataclass
@@ -19,7 +19,4 @@ class Ops(DbInterface):
 
     def bulk_export_between(self, start_time: datetime, end_time: datetime, to_folder: Path,
                             table_name: str | None = None):
-        pass
-
-    def load(self, table_name: str | None = None):
         pass

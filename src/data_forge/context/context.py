@@ -12,7 +12,7 @@ class Context:
     client_secret: str
     export_path: str
     grant_type: str
-    tables: list[dict]
+    tables: dict
     databases: dict
 
     @classmethod

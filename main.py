@@ -1,11 +1,14 @@
 from pathlib import Path
-from src.data_forge import Pipeline, load_json
+from src.data_forge import Builder
 
 root_path = Path(__file__).resolve().parent
 config_path = root_path / "src/resources/manifest.json"
-manifest = load_json(config_path)
-export_path = manifest["export_path"]
+builder = Builder(config_path=config_path)
 
-pipeline = Pipeline.configure(config_path=config_path)
-pipeline.bulk_export(from_table="Opportunity", to_folder=export_path)
+context = builder.context()
+export_path = Path(context.export_path)
+
+pipeline = builder.pipeline()
+
+pipeline.run_daily_el(for_db="erp")
 

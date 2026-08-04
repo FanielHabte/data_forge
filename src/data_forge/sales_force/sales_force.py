@@ -107,7 +107,7 @@ class SalesForce:
         soql_kwargs = self._soql_request_kwargs(table_name=table_name)
         json_response = _request_json(kwargs=soql_kwargs)
 
-        self._process_response(json_response)
+        return self._process_response(json_response)
 
     def fetch_all_data(self) -> None:
         tables = self.context.tables

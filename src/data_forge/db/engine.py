@@ -9,9 +9,9 @@ from data_forge.db.engine_payload import DBEnginePayload
 class DBEngine:
     payload: DBEnginePayload
 
-    @classmethod
-    def build(cls) -> Engine:
-        payload = cls.payload
+
+    def build(self) -> Engine:
+        payload = self.payload
 
         # sqlalchemy syntax
         # dialect://username:password@host:port/database
