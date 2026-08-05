@@ -12,6 +12,7 @@ class Context:
     client_secret: str
     export_path: str
     grant_type: str
+    marking_columns: dict
     tables: dict
     databases: dict
 
@@ -19,6 +20,14 @@ class Context:
     def load_context_from(cls, file_path: Path) -> "Context":
         manifest = _read_resource_file(file_path=file_path)
         return cls(**manifest)
+
+    @classmethod
+    def get_columns(cls, table_name: str, source: str) -> list[dict]:
+        return cls.tables[source][table_name]
+
+    @classmethod
+    def get_tables(cls, source: str) -> list[str]:
+        return list(cls.tables[source].keys())
 
 
 def _read_resource_file(file_path: Path) -> dict:

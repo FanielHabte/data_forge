@@ -2,12 +2,11 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-from data_forge.db.db_super_class import DWInterface
-from polars.dataframe.frame import DataFrame
+from data_forge.db_engine.db_super_class import DWInterface
 
 
 @dataclass
-class Edi(DWInterface):
+class TargetDW(DWInterface):
 
     def extract_latest_data(self, table_name: str):
         pass

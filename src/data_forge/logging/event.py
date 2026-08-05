@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import datetime
 
-from src.data_forge.util.helper import utc_now
+from src.data_forge.util.util import utc_now
 
 
 @dataclass

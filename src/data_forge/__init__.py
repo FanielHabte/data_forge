@@ -1,1 +1,1 @@
-from .factory.builder import Builder
+from .builder.builder import Builder

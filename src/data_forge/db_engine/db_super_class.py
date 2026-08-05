@@ -6,15 +6,12 @@ from pathlib import Path
 from sqlalchemy.engine import Engine
 
 from data_forge.context.context import Context
-from data_forge.db.query_payload import Query
-from polars.dataframe.frame import DataFrame
 
 
 @dataclass
 class DbInterface(ABC):
     engine: Engine
     context: Context
-    query: Query
 
     # check_point: CheckPoint
 

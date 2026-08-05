@@ -11,7 +11,7 @@ def load_environment():
         # Fetch from AWS Secrets Manager on EC2
         import boto3
 
-        secret_name = os.getenv("AWS_SECRET_NAME", "prod/db/credentials")
+        secret_name = os.getenv("AWS_SECRET_NAME", "prod/db_engine/credentials")
         region_name = os.getenv("AWS_REGION", "us-east-1")
 
         client = boto3.client("secretsmanager", region_name=region_name)

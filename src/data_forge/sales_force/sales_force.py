@@ -6,21 +6,26 @@ from pandas import read_csv
 import requests
 from dataclasses import dataclass
 
-from data_forge.sales_force.auth.auth import Auth
+from data_forge.sales_force.auth import Auth
 from src.data_forge.context.context import Context
-from data_forge.db.query_payload import Query
+from data_forge.util.query_builder import build_select_query
 
 
 @dataclass(frozen=True)
 class SalesForce:
     context: Context
+    source: str = "crm"
     auth: Auth
-    query: Query
 
     def _soql_request_kwargs(self, table_name: str) -> dict:
         token = self.auth.get_token()
         base_url = self.context.base_url
-        sql_query = self.query.build_select_query(table_name=table_name)
+
+        sql_query = build_select_query(
+            table_name=table_name,
+            columns=self.context.fetch_columns(table_name, self.source),
+            source=self.source
+        )
 
         header = {"Authorization": f"Bearer {token}"}
         endpoint = "/services/data/v60.0/queryAll"
@@ -35,7 +40,12 @@ class SalesForce:
     def _bulk_request_kwargs(self, table_name: str):
         token = self.auth.get_token()
         base_url = self.context.base_url
-        sql_query = self.query.build_select_query(table_name=table_name)
+
+        sql_query = build_select_query(
+            table_name=table_name,
+            columns=self.context.fetch_columns(table_name, self.source),
+            source=self.source
+        )
 
         header = {
             "Authorization": f"Bearer {token}",

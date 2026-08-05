@@ -4,19 +4,24 @@ from pathlib import Path
 
 import polars as pl
 
-from data_forge.db.db_super_class import DbInterface
-
+from data_forge.db_engine.db_super_class import DbInterface
+from data_forge.util.query_builder import build_select_query
 
 @dataclass
-class Erp(DbInterface):
-    source: str = "erp"
+class SourceDB(DbInterface):
+    source: str
 
     def extract_latest_data(self, table_name: str):
-        query = self.query.build_select_query(table_name=table_name, source=self.source, merged_type=True)
+
+        sql_query = build_select_query(
+            table_name=table_name,
+            columns=self.context.fetch_columns(table_name, self.source),
+            source=self.source
+        )
 
         with self.engine.connect() as conn:
             df_iter = pl.read_database(
-                query=query,
+                query=sql_query,
                 connection=conn,
                 iter_batches=True,
                 batch_size=50000
