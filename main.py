@@ -1,3 +1,4 @@
+from datetime import datetime
 from pathlib import Path
 from src.data_forge import Builder
 
@@ -9,6 +10,6 @@ context = builder.context()
 export_path = Path(context.export_path)
 
 pipeline = builder.pipeline()
+pipeline_start_datetime = datetime.now()
 
-pipeline.run_daily_el(for_db="erp")
-
+pipeline.run_daily_pipeline(run_datetime=pipeline_start_datetime)

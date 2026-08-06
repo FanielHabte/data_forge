@@ -25,7 +25,8 @@ class TargetDW(DWInterface):
         pass
 
     def insert_dataframe(self, data_stream, table_name: str, source: str):
-        with self.engine.connect() as conn:
+        with self.db_engine.build_connection() as conn:
+            print(f"EDI: built connection for: {self.db_engine.build_uri()}")
             for batch_index, batch_df in enumerate(data_stream):
                 batch_df.write_database(
                     table_name=f"{source}.{table_name}",
@@ -33,7 +34,7 @@ class TargetDW(DWInterface):
                     engine='sqlalchemy',
                     if_table_exists='append'
                 )
-                print(f"Processed batch {batch_index + 1} with {len(batch_df)}")
+                print(f"EDI: Wrote batch index of {batch_index} and {len(batch_df)} records")
 
     def merge_latest_data(self):
         pass

@@ -14,8 +14,8 @@ from data_forge.util.query_builder import build_select_query
 @dataclass(frozen=True)
 class SalesForce:
     context: Context
-    source: str = "crm"
     auth: Auth
+    source: str = "crm"
 
     def _soql_request_kwargs(self, table_name: str) -> dict:
         token = self.auth.get_token()
@@ -23,7 +23,7 @@ class SalesForce:
 
         sql_query = build_select_query(
             table_name=table_name,
-            columns=self.context.fetch_columns(table_name, self.source),
+            columns=self.context.get_columns(table_name, self.source),
             source=self.source
         )
 
@@ -43,7 +43,7 @@ class SalesForce:
 
         sql_query = build_select_query(
             table_name=table_name,
-            columns=self.context.fetch_columns(table_name, self.source),
+            columns=self.context.get_columns(table_name, self.source),
             source=self.source
         )
 

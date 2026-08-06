@@ -8,7 +8,6 @@ from src.data_forge.context.context import Context
 class Auth:
     context: Context
 
-
     def get_token(self):
         post_kwargs = {
             "url": f"{self.context.base_url}/services/oauth2/token",

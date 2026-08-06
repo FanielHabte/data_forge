@@ -3,11 +3,8 @@ from pathlib import Path
 
 from data_forge.context.context import Context
 from data_forge.db_engine.engine import DBEngine
-from data_forge.db_engine.engine_payload import DBEnginePayload
-from data_forge.util.query_builder import Query
-from data_forge.db_services.target import Edi, TargetDW
-from data_forge.db_services.source import Erp, SourceDB
-from data_forge.db_services.ops import Ops
+from data_forge.db_services.target import TargetDW
+from data_forge.db_services.source import SourceDB
 from data_forge.pipeline.pipeline import Pipeline
 from data_forge.sales_force.auth import Auth
 from data_forge.sales_force.sales_force import SalesForce
@@ -23,24 +20,25 @@ class Builder:
     def auth(self):
         return Auth(context=self.context())
 
-    def source_db(self, db_name: str):
+    def source_db(self, db_name: str, source: str):
         return SourceDB(
             context=self.context(),
-            engine=self.engine(db_name=db_name),
+            db_engine=self.engine(db_name=db_name),
+            source=source
         )
 
     def target_dw(self, db_name: str):
         return TargetDW(
             context=self.context(),
-            engine=self.engine(db_name=db_name),
+            db_engine=self.engine(db_name=db_name),
         )
 
     def pipeline(self):
         return Pipeline(
             context=self.context(),
-            dw=self.target_dw(db_name="analytics"),
-            erp=self.source_db(db_name="erp"),
-            ops=self.source_db(db_name="ops"),
+            edi=self.target_dw(db_name="edi"),
+            erp=self.source_db(db_name="erp", source="erp"),
+            ops=self.source_db(db_name="ops", source="ops"),
             sales_force=self.salesforce()
         )
 
@@ -51,4 +49,4 @@ class Builder:
         )
 
     def engine(self, db_name):
-        return DBEngine.configure(self.context(), db_name).build()
+        return DBEngine.configure(self.context(), db_name)
