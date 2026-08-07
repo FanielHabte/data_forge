@@ -60,7 +60,7 @@ class SourceDB(DbInterface):
         else:
             watermark_object: Watermark = watermark_response["wm_object"]
             yield from self.extract_after_watermark(table_name=table_name, run_datetime=run_datetime,
-                                         watermark=watermark_object)
+                                                    watermark=watermark_object)
 
     def bulk_export(self, to_folder: Path):
         pass

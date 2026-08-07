@@ -44,6 +44,7 @@ class Pipeline:
         for table in tables:
             print(f"Started work on table {table}")
             watermark_response = Watermark.load(table_name=table, target_dw=self.edi)
-            data_stream = source_db.request_data(table_name=table, run_datetime=run_datetime, watermark_response=watermark_response)
+            data_stream = source_db.request_data(table_name=table, run_datetime=run_datetime,
+                                                 watermark_response=watermark_response)
             self.edi.insert_dataframe(data_stream=data_stream, table_name=table, source=source_db.source)
             print(f"Completed work on table <<{table}>>\n")

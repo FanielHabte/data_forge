@@ -17,7 +17,3 @@ class ExtractionPartition:
 
     source_query: str | None = None
     expected_records: int | None = None
-
-@dataclass
-class ExtractionPartitionRepository:
-    pass

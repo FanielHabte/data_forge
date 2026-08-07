@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
 
 from sqlalchemy import text
@@ -25,7 +25,6 @@ class Watermark:
             if df.is_empty():
                 print("No watermark")
                 return {"is_empty": True}
-
 
             df_row = df.row(0, named=True)
 

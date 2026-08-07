@@ -175,7 +175,7 @@ class SalesForce:
             api_call_count += 1
             records_count += len(next_page_records)
 
-            ## check if we have 120 calls and sleep for a min with 10 seconds as buffer
+            # check if we have 120 calls and sleep for a min with 10 seconds as buffer
             if api_call_count % 120 == 0:
                 print(
                     f"Sleeping for 70 seconds given that 120 calls per min limit as been reached. "
