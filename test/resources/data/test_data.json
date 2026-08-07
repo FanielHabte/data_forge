@@ -1,0 +1,248 @@
+{
+  "crm": {
+    "Account": [
+      {
+        "Id": "001TEST000000001AA",
+        "Name": "Northwind Traders",
+        "AccountNumber": "NW-10001",
+        "Industry": "Manufacturing",
+        "Type": "Customer",
+        "BillingCountry": "United States",
+        "AnnualRevenue": 1250000.00,
+        "NumberOfEmployees": 175,
+        "OwnerId": "005TEST00001",
+        "CreatedDate": "2026-01-15T09:30:00Z",
+        "LastModifiedDate": "2026-08-01T14:20:00Z",
+        "IsDeleted": false
+      }
+    ],
+    "Opportunity": [
+      {
+        "Id": "006TEST000000001AA",
+        "AccountId": "001TEST000000001AA",
+        "Name": "Northwind Q3 Expansion",
+        "StageName": "Proposal/Price Quote",
+        "Amount": 240000.00,
+        "CurrencyIsoCode": "USD",
+        "CloseDate": "2026-09-30",
+        "Probability": 70,
+        "LeadSource": "Web",
+        "CampaignId": null,
+        "DiscountPercent": 5.00,
+        "LossReason": null,
+        "SalesCycleDays": 45,
+        "OwnerId": "005TEST00001",
+        "CreatedDate": "2026-07-01T08:00:00Z",
+        "LastModifiedDate": "2026-08-01T14:20:00Z",
+        "IsDeleted": false
+      }
+    ]
+  },
+  "ops": {
+    "carriers": [
+      {
+        "carrier_code": "DHL",
+        "carrier_name": "DHL Express",
+        "mode": "AIR",
+        "cost_index": 1.125,
+        "published_otd_rate": 0.978,
+        "created_at": "2026-01-01T00:00:00Z",
+        "updated_at": "2026-08-01T14:20:00Z"
+      }
+    ],
+    "customers": [
+      {
+        "customer_id": 10001,
+        "account_number": "NW-10001",
+        "customer_name": "Northwind Traders",
+        "segment": "Enterprise",
+        "industry": "Manufacturing",
+        "region": "West",
+        "company_code": "US01",
+        "country": "United States",
+        "employee_count": 175,
+        "credit_limit_usd": 500000.00,
+        "payment_terms_days": 30,
+        "is_active": true,
+        "created_at": "2026-01-15T09:30:00Z",
+        "updated_at": "2026-08-01T14:20:00Z"
+      }
+    ],
+    "invoices": [
+      {
+        "invoice_id": 9000001,
+        "invoice_number": "INV-2026-000001",
+        "order_id": 5000001,
+        "currency_code": "USD",
+        "amount": 228000.00,
+        "status": "OPEN",
+        "invoice_date": "2026-08-02",
+        "created_at": "2026-08-02T10:00:00Z",
+        "updated_at": "2026-08-02T10:00:00Z"
+      }
+    ],
+    "order_lines": [
+      {
+        "order_line_id": 6000001,
+        "order_id": 5000001,
+        "product_id": 2001,
+        "quantity": 100,
+        "unit_price": 2400.00,
+        "discount_pct": 5.00,
+        "line_amount": 228000.00,
+        "unit_cost_usd": 1700.00,
+        "created_at": "2026-08-01T14:30:00Z",
+        "updated_at": "2026-08-01T14:30:00Z"
+      }
+    ],
+    "orders": [
+      {
+        "order_id": 5000001,
+        "customer_id": 10001,
+        "opportunity_ref": "006TEST000000001AA",
+        "rep_id": "005TEST00001",
+        "order_date": "2026-08-01",
+        "requested_delivery_date": "2026-08-15",
+        "currency_code": "USD",
+        "status": "CONFIRMED",
+        "sales_channel": "DIRECT",
+        "order_discount_pct": 5.00,
+        "po_number": "PO-NW-2026-001",
+        "created_at": "2026-08-01T14:30:00Z",
+        "updated_at": "2026-08-01T14:30:00Z"
+      }
+    ],
+    "products": [
+      {
+        "product_id": 2001,
+        "sku": "NW-ANL-ENT-01",
+        "product_name": "Northwind Analytics Enterprise",
+        "category": "Software",
+        "product_family": "Analytics",
+        "list_price_usd": 2400.00,
+        "standard_cost_usd": 1700.00,
+        "is_discontinued": false,
+        "discontinued_on": null,
+        "launch_date": "2025-01-01",
+        "created_at": "2025-01-01T00:00:00Z",
+        "updated_at": "2026-08-01T14:20:00Z"
+      }
+    ],
+    "shipments": [
+      {
+        "shipment_id": 7000001,
+        "order_id": 5000001,
+        "warehouse_code": "SEA-01",
+        "carrier_code": "DHL",
+        "service_level": "EXPRESS",
+        "package_count": 2,
+        "gross_weight_kg": 18.50,
+        "distance_km": 1540.00,
+        "freight_cost_usd": 185.75,
+        "tracking_number": "DHLTEST000000001",
+        "promised_delivery_date": "2026-08-15",
+        "ship_date": "2026-08-03",
+        "delivered_date": null,
+        "created_at": "2026-08-03T09:00:00Z",
+        "updated_at": "2026-08-03T09:00:00Z"
+      }
+    ],
+    "support_cases": [
+      {
+        "case_id": 8000001,
+        "customer_id": 10001,
+        "case_type": "Technical",
+        "priority": "P1",
+        "channel": "EMAIL",
+        "resolution_hours": null,
+        "status": "OPEN",
+        "csat_score": null,
+        "assigned_region": "West",
+        "opened_at": "2026-08-04T11:00:00Z",
+        "created_at": "2026-08-04T11:00:00Z",
+        "updated_at": "2026-08-04T11:00:00Z"
+      }
+    ],
+    "warehouses": [
+      {
+        "warehouse_code": "SEA-01",
+        "warehouse_name": "Seattle Distribution Center",
+        "region": "West",
+        "latitude": 47.60620,
+        "longitude": -122.33210,
+        "created_at": "2025-01-01T00:00:00Z",
+        "updated_at": "2026-08-01T14:20:00Z"
+      }
+    ]
+  },
+  "erp": {
+    "companies": [
+      {
+        "company_code": "US01",
+        "company_name": "Northwind USA, Inc.",
+        "functional_currency": "USD",
+        "country": "United States",
+        "created_at": "2025-01-01T00:00:00Z",
+        "updated_at": "2026-08-01T14:20:00Z"
+      }
+    ],
+    "cost_centers": [
+      {
+        "cost_center_code": "SALES-WEST",
+        "cost_center_name": "West Sales",
+        "company_code": "US01",
+        "region": "West",
+        "function": "Sales",
+        "owner_email": "west.sales@northwind.example",
+        "is_active": true,
+        "valid_from": "2025-01-01",
+        "valid_to": null,
+        "created_at": "2025-01-01T00:00:00Z",
+        "updated_at": "2026-08-01T14:20:00Z"
+      }
+    ],
+    "fx_rates": [
+      {
+        "from_currency": "USD",
+        "to_currency": "EUR",
+        "rate_type": "SPOT",
+        "rate": 0.92150000,
+        "source_system": "ECB",
+        "rate_date": "2026-08-01",
+        "loaded_at": "2026-08-01T18:00:00Z",
+        "created_at": "2026-08-01T18:00:00Z",
+        "updated_at": "2026-08-01T18:00:00Z"
+      }
+    ],
+    "gl_accounts": [
+      {
+        "gl_account": "400000",
+        "gl_name": "Product Revenue",
+        "account_type": "REVENUE",
+        "is_postable": true,
+        "created_at": "2025-01-01T00:00:00Z",
+        "updated_at": "2026-08-01T14:20:00Z"
+      }
+    ],
+    "revenue_postings": [
+      {
+        "posting_id": 9100001,
+        "document_number": "INV-2026-000001",
+        "document_type": "INVOICE",
+        "company_code": "US01",
+        "order_ref": 5000001,
+        "reverses_posting_id": null,
+        "gl_account": "400000",
+        "cost_center_code": "SALES-WEST",
+        "document_currency": "USD",
+        "company_currency": "USD",
+        "amount_doc": 228000.00,
+        "amount_company": 228000.00,
+        "fiscal_period": "2026-08",
+        "posting_date": "2026-08-02",
+        "posted_at": "2026-08-02T10:05:00Z",
+        "created_at": "2026-08-02T10:05:00Z"
+      }
+    ]
+  }
+}
