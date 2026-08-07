@@ -1,7 +1,7 @@
 import requests
 from dataclasses import dataclass
 
-from src.data_forge.context.context import Context
+from data_forge.context.context import Context
 
 
 @dataclass(frozen=True)
