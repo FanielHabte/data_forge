@@ -12,14 +12,12 @@ class DbInterface(ABC):
     db_engine: DBEngine
     context: Context
 
-    # check_point: CheckPoint
-
     @abstractmethod
-    def extract_latest_data(self, table_name: str, run_datetime: datetime):
+    def extract_data(self, run_datetime: datetime, sql_query: str):
         pass
 
     @abstractmethod
-    def extract_between(self, start_time: datetime, end_time: datetime, table_name: str):
+    def extract_after_watermark(self, table_name: str, run_datetime: datetime, watermark):
         pass
 
     @abstractmethod

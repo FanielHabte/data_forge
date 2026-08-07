@@ -6,6 +6,7 @@ from data_forge.db_services.target import TargetDW
 from data_forge.db_services.source import SourceDB
 from src.data_forge.context.context import Context
 from data_forge.sales_force.sales_force import SalesForce
+from data_forge.logging.watermark import Watermark
 
 
 @dataclass(frozen=True)
@@ -42,6 +43,7 @@ class Pipeline:
         tables = self.context.get_tables(source_db.source)
         for table in tables:
             print(f"Started work on table {table}")
-            data_stream = self.erp.extract_latest_data(table_name=table, run_datetime=run_datetime)
+            watermark_response = Watermark.load(table_name=table, target_dw=self.edi)
+            data_stream = source_db.request_data(table_name=table, run_datetime=run_datetime, watermark_response=watermark_response)
             self.edi.insert_dataframe(data_stream=data_stream, table_name=table, source=source_db.source)
             print(f"Completed work on table <<{table}>>\n")

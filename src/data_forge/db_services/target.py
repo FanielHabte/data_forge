@@ -8,10 +8,10 @@ from data_forge.db_engine.db_super_class import DWInterface
 @dataclass
 class TargetDW(DWInterface):
 
-    def extract_latest_data(self, table_name: str):
+    def extract_data(self, run_datetime: datetime, sql_query: str):
         pass
 
-    def extract_between(self, start_time: datetime, end_time: datetime, table_name: str | None = None):
+    def extract_after_watermark(self, table_name: str, run_datetime: datetime, watermark):
         pass
 
     def bulk_export(self, to_folder: Path):
@@ -27,6 +27,7 @@ class TargetDW(DWInterface):
     def insert_dataframe(self, data_stream, table_name: str, source: str):
         with self.db_engine.build_connection() as conn:
             print(f"EDI: built connection for: {self.db_engine.build_uri()}")
+
             for batch_index, batch_df in enumerate(data_stream):
                 batch_df.write_database(
                     table_name=f"{source}.{table_name}",

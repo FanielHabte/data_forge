@@ -27,6 +27,9 @@ class Context:
     def get_tables(self, source: str) -> list[str]:
         return list(self.tables[source].keys())
 
+    def get_marking_column(self, source: str, table_name: str) -> str:
+        return self.marking_column[source][table_name]
+
 
 def _read_resource_file(file_path: Path) -> dict:
     if not file_path.exists():
