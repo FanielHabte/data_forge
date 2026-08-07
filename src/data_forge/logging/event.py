@@ -1,8 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import datetime
 
-from src.data_forge.util.util import utc_now
-
 
 @dataclass
 class Event:
@@ -14,4 +12,4 @@ class Event:
     destination_uri: str | None = None
     error_type: str | None = None
     error_message: str | None = None
-    created_at: datetime = field(default_factory=utc_now)
+    created_at: datetime = field(default_factory=datetime.now)
