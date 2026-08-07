@@ -1,6 +1,6 @@
 from datetime import datetime
 from pathlib import Path
-from src.data_forge import Builder
+from src.data_forge.builder.builder import Builder
 
 root_path = Path(__file__).resolve().parent
 config_path = root_path / "src/resources/manifest.json"

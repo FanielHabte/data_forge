@@ -5,9 +5,9 @@ def build_select_query(table_name: str, columns: list[dict], source: str, format
     columns = build_columns(columns)
 
     if format_query:
-        return f""" select {columns} from {source}.{table_name} """
+        return f"""select {columns} from {source}.{table_name}"""
 
-    return f""" select {columns} from {table_name} """
+    return f"""select {columns} from {table_name}"""
 
 
 def latest_data_fetching_query(table_name: str, highest_mark: datetime, columns: list[dict], marking_column: str,
